@@ -23,19 +23,16 @@ class PalindromeController extends Controller
 
             if ($text == $reverse) {
                 return response()->json([
-                    'status' => 'success',
                     'message' => 'Palindrome'
                 ], 200);
             } else {
                 return response()->json([
-                    'status' => 'failed',
                     'message' => 'Not Palindrome'
                 ], 400);
             }
 
         } catch (\Throwable $th) {
             return response()->json([
-                'status' => 'error',
                 'message' => $th->getMessage()
             ], 400);
         }

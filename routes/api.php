@@ -1,13 +1,20 @@
 <?php
 
+use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\PalindromeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('v1')->group(function () {
+    Route::get('/', function () {
+        return response()->json(['message' => 'Hello Laravel Developers']);
+    });
+
     Route::get('/check-palindrome', [PalindromeController::class, 'checkPalindrome']);
+
+    Route::post('/language', [LanguageController::class, 'store']);
+    Route::get('/language/{id}', [LanguageController::class, 'show']);
+    Route::get('/languages', [LanguageController::class, 'index']);
+    Route::patch('/language/{id}', [LanguageController::class, 'update']);
+    Route::delete('/language/{id}', [LanguageController::class, 'destroy']);
 });
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');

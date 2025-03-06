@@ -38,6 +38,11 @@ return [
             'serialize' => false,
         ],
 
+        'data_language' => [
+            'driver' => 'file',
+            'path' => storage_path('framework/cache/language'),
+        ],
+
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_CACHE_CONNECTION'),
