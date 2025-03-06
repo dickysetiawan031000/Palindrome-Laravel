@@ -4,6 +4,11 @@ use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\PalindromeController;
 use Illuminate\Support\Facades\Route;
 
+Route::fallback(function () {
+    return response()->json([
+        'message' => 'Method Not Allowed'
+    ], 405);
+});
 
 Route::prefix('v1')->group(function () {
     Route::get('/', function () {
