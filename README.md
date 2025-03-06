@@ -1,66 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Description
 
-## About Laravel
+This project is a Laravel-based API that offers two main features. First, it can check whether a given text is a palindrome, meaning the text reads the same forward and backward. Second, it provides CRUD (Create, Read, Update, Delete) functionality for managing language data. The language data is stored using a caching mechanism to improve performance and data access efficiency.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+With caching in place, retrieving language data becomes faster as it does not always require direct database access. This is highly beneficial for improving scalability and reducing server load.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Clone this repository**
+   ```sh
+   git clone git@github.com:dickysetiawan031000/Palindrome-Laravel.git
+   cd project_name
+   ```
+2. **Install dependencies**
+   ```sh
+   composer install
+   ```
+3. **Create the .env file**
+   ```sh
+   cp .env.example .env
+   ```
+4. **Configure the environment**
+   - Adjust the database configuration in the `.env` file.
+5. **Generate the application key**
+   ```sh
+   php artisan key:generate
+   ```
+6. **Run database migrations**
+   ```sh
+   php artisan migrate
+   ```
+7. **Start the local server**
+   ```sh
+   php artisan serve
+   ```
 
-## Learning Laravel
+## API Endpoints
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Version: v1
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### 1. Palindrome Check
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Endpoint:** `GET /api/v1/check-palindrome`
+- **Description:** Checks whether a given word or phrase is a palindrome.
+- **Example Response:**
+  ```json
+  {
+    "message": "Palindrome"
+  }
+  ```
 
-## Laravel Sponsors
+#### 2. Language Management
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Add Language**
+  - **Endpoint:** `POST /api/v1/language`
+  - **Description:** Adds a new language entry.
 
-### Premium Partners
+- **Get Language by ID**
+  - **Endpoint:** `GET /api/v1/language/{id}`
+  - **Description:** Retrieves language information based on the provided ID.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Get All Languages**
+  - **Endpoint:** `GET /api/v1/languages`
+  - **Description:** Retrieves a list of all available languages.
 
-## Contributing
+- **Update Language**
+  - **Endpoint:** `PATCH /api/v1/language/{id}`
+  - **Description:** Updates language data based on the provided ID.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Delete Language**
+  - **Endpoint:** `DELETE /api/v1/language/{id}`
+  - **Description:** Deletes a language entry based on the provided ID.
 
-## Code of Conduct
+## Handling Unauthorized Methods
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+If a user accesses a route with an unsupported HTTP method, the API will return a **405 Method Not Allowed** response.
 
-## Security Vulnerabilities
+## Postman Collection
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+To easily test the API, you can import the provided Postman collection:
 
-## License
+[Download Postman Collection](postman_collection.json)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Alternatively, you can use the following Postman collection JSON:
+
+```json
+{
+  "info": {
+    "_postman_id": "22c03307-e2b3-45f3-bd3d-6a6a4a530ff3",
+    "name": "Technical Test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Language",
+      "item": [
+        {
+          "name": "Index",
+          "request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8000/api/v1/languages"
+          }
+        },
+        {
+          "name": "Show",
+          "request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8000/api/v1/language/3"
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:8000/api/v1/language/3"
+          }
+        },
+        {
+          "name": "Store",
+          "request": {
+            "method": "POST",
+            "url": "http://127.0.0.1:8000/api/v1/language",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"language\": \"Python\", \"appeared\": 1991 }"
+            }
+          }
+        },
+        {
+          "name": "Edit",
+          "request": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:8000/api/v1/language/2",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"language\": \"Laravel edited\" }"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Palindrome Check",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8000/api/v1/check-palindrome",
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"text\": \"wakaw\" }"
+        }
+      }
+    }
+  ]
+}
+```
+
+---
+
+Thank you for using this API! 🚀
+
